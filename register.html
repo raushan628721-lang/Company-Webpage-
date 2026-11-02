@@ -3,171 +3,532 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NextGen Digital | Register</title>
+  <title>NEXUS ENTERPRISE | New Registration</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #122028;
-      --muted: #5f6f79;
-      --paper: #f3f5f2;
-      --white: #ffffff;
-      --lime: #d9ea5b;
-      --coral: #e57d63;
-      --line: #d7dfd5;
-      --shadow: 0 28px 70px rgba(18, 32, 40, 0.10);
+      --bg-body: #0c0e12;
+      --bg-card: #12151a;
+      --border-card: #1f242c;
+      --accent: #bef33e;
+      --accent-hover: #d2fb5c;
+      --text-white: #ffffff;
+      --text-muted: #8c96a3;
+      --text-light: #e6edf3;
+      --btn-dark-bg: #181c22;
+      --btn-dark-border: #29303c;
+      --input-bg: #161a22;
+      --input-border: #262d3a;
     }
-    * { box-sizing: border-box; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      margin: 0;
-      font-family: 'DM Sans', sans-serif;
-      background: var(--paper);
-      color: var(--ink);
+      background-color: var(--bg-body);
+      color: var(--text-white);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-    a { color: inherit; text-decoration: none; }
-    .topbar {
-      height: 86px; display: flex; align-items: center; justify-content: space-between;
-      padding: 0 6vw; border-bottom: 1px solid rgba(18,32,40,.08);
-      background: rgba(243,245,242,.92);
-      backdrop-filter: blur(12px);
+
+    a { text-decoration: none; color: inherit; }
+
+    /* Navbar */
+    .navbar {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      background: rgba(12, 14, 18, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
+
     .brand {
-      display: flex; align-items: center; gap: 12px;
-      font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -0.8px;
-    }
-    .brand-mark {
-      width: 31px; height: 31px; border-radius: 8px; background: var(--ink); color: var(--lime);
-      display: grid; place-items: center; font-size: 15px; font-family: 'Space Grotesk', sans-serif;
-    }
-    .brand-dot { color: var(--coral); }
-    .nav {
-      display: flex; align-items: center; gap: 22px; font-size: 14px; font-weight: 500;
-    }
-    .nav a:last-child {
-      border: 1px solid var(--ink); padding: 11px 18px; border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
     }
 
-    .register-wrap {
-      min-height: calc(100vh - 82px);
-      display: grid; grid-template-columns: 1fr 1.15fr; align-items: center; padding: 6vh 10vw;
-      gap: 4vw;
-    }
-    .left {
-      align-self: center;
-    }
-    .left h1 {
-      font-family: 'Space Grotesk', sans-serif; font-size: clamp(46px, 5vw, 74px); margin: 0; line-height: 0.97; letter-spacing: -2px;
-    }
-    .left h1 em { color: var(--coral); font-style: normal; }
-    .eyebrow {
-      margin: 0 0 18px; font-size: 11px; letter-spacing: 1.7px; text-transform: uppercase; color: var(--muted); font-weight: 700;
-    }
-    .left p {
-      color: var(--muted); font-size: 17px; max-width: 380px; line-height: 1.6; margin-top: 20px;
+    .brand-badge {
+      background: var(--accent);
+      color: #0c0e12;
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 0.8px;
+      padding: 4px 8px;
+      border-radius: 4px;
     }
 
-    .card {
-      background: var(--white); box-shadow: var(--shadow); padding: 36px 34px; width: 100%; max-width: 620px; justify-self: center;
+    .brand-title {
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: 0.5px;
     }
-    .card h2 {
-      margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: clamp(28px, 3vw, 40px); letter-spacing: -1px;
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
-    .muted {
-      margin: 10px 0 24px; color: var(--muted); font-size: 14px;
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 18px;
+      font-size: 13.5px;
+      font-weight: 600;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
     }
-    form { display: grid; gap: 18px; }
-    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .nav-btn-active {
+      background: var(--accent);
+      color: #0c0e12;
+      font-weight: 700;
+    }
+
+    .nav-btn-dark {
+      background: var(--btn-dark-bg);
+      border-color: var(--btn-dark-border);
+      color: #c9d1d9;
+    }
+
+    .nav-btn-dark:hover {
+      background: #222733;
+      color: var(--text-white);
+    }
+
+    /* Container */
+    .register-container {
+      flex: 1;
+      max-width: 980px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .register-left {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .register-tag {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .register-left h1 {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      line-height: 1.15;
+    }
+
+    .register-left h1 span {
+      color: var(--accent);
+    }
+
+    .register-left p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* Form Card */
+    .register-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 36px 32px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      position: relative;
+    }
+
+    .register-card h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .register-card .subtitle {
+      color: var(--text-muted);
+      font-size: 13.5px;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
     label {
-      display: grid; gap: 7px; font-size: 13px; font-weight: 700;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-light);
     }
+
     select, input {
-      width: 100%; border: 1px solid var(--line); background: #fbfcf9; color: var(--ink); padding: 13px 12px; font: 15px 'DM Sans', sans-serif; outline: none;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      color: var(--text-white);
+      padding: 11px 13px;
+      font-size: 14px;
+      font-family: inherit;
+      border-radius: 8px;
+      outline: none;
+      transition: all 0.2s ease;
     }
-    input:focus, select:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(217,237,98,.5); }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 16px; width: 100%; border: none; padding: 15px 18px; font: 700 15px 'DM Sans', sans-serif; cursor: pointer; background: var(--ink); color: var(--white);
+
+    select:focus, input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(190, 243, 62, 0.15);
     }
-    .btn:hover { background: #2d3b36; }
-    .small-link {
-      margin-top: 20px; text-align: center; color: var(--muted); font-size: 13px;
+
+    .submit-btn {
+      background: var(--accent);
+      color: #0c0e12;
+      font-size: 14.5px;
+      font-weight: 700;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
     }
-    .small-link a { color: var(--ink); font-weight: 700; text-decoration: underline; }
-    small {
-      color: var(--muted); font-size: 11px; margin-top: -8px;
+
+    .submit-btn:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 4px 18px rgba(190, 243, 62, 0.3);
+      transform: translateY(-1px);
     }
-    @media (max-width: 760px) {
-      .register-wrap { grid-template-columns: 1fr; padding: 30px 8vw; }
-      .row { grid-template-columns: 1fr; }
-      .card { padding: 26px 20px; }
-      .nav a:not(:last-child) { display: none; }
+
+    .card-footer {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .card-footer a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    /* AFTER REGISTRATION SUCCESS STATE */
+    .success-container {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .success-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .success-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(190, 243, 62, 0.15);
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .success-info-box {
+      background: #171c24;
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 13.5px;
+    }
+
+    .success-info-item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 8px;
+    }
+
+    .success-info-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .success-info-item span:first-child {
+      color: var(--text-muted);
+    }
+
+    .success-info-item span:last-child {
+      color: var(--text-white);
+      font-weight: 600;
+    }
+
+    .lab-condition-pill {
+      background: #121820;
+      border: 1px solid var(--border-card);
+      border-left: 3px solid var(--accent);
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .btn-row a, .btn-row button {
+      flex: 1;
+      text-align: center;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: #0c0e12;
+      border: none;
+    }
+
+    .btn-accent:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-dark {
+      background: var(--btn-dark-bg);
+      border: 1px solid var(--btn-dark-border);
+      color: var(--text-white);
+    }
+
+    .btn-dark:hover {
+      background: #232935;
+    }
+
+    @media (max-width: 768px) {
+      .navbar { padding: 14px 20px; flex-direction: column; gap: 12px; height: auto; }
+      .register-container { grid-template-columns: 1fr; margin: 20px auto; }
+      .form-row { grid-template-columns: 1fr; }
+      .btn-row { flex-direction: column; }
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <a href="index.html" class="brand">
-      <span class="brand-mark">N</span>
-      <span>NextGen Digital<span class="brand-dot">.</span></span>
-    </a>
-    <nav class="nav">
-      <a href="index.html#about">About us</a>
-      <a href="login.html">Sign in</a>
-      <a href="register.html">Join the team</a>
+
+  <!-- Top Navbar -->
+  <header class="navbar">
+    <div class="brand" onclick="window.location.href='index.html'">
+      <span class="brand-badge">NEXUS</span>
+      <span class="brand-title">ENTERPRISE</span>
+    </div>
+
+    <nav class="nav-links">
+      <a href="index.html" class="nav-btn nav-btn-dark">Home</a>
+      <a href="register.html" class="nav-btn nav-btn-active">Registration</a>
+      <a href="login.html" class="nav-btn nav-btn-dark">Login</a>
+      <a href="index.html" class="nav-btn nav-btn-dark">PHP / MySQL Backend</a>
     </nav>
   </header>
 
-  <main class="register-wrap">
-    <section class="left">
-      <p class="eyebrow">Start here</p>
-      <h1>Bring your<br><em>whole self.</em></h1>
-      <p>Every good collaboration starts with a hello. Tell us a little about yourself and join the NextGen Digital team.</p>
-    </section>
+  <main class="register-container">
+    <div class="register-left">
+      <span class="register-tag">Enterprise Onboarding</span>
+      <h1>Create New <span>Profile</span></h1>
+      <p>Register as an Employee in the system database. Registered records immediately become searchable by system Admins.</p>
+    </div>
 
-    <section class="card">
-      <h2>Create your account</h2>
-      <p class="muted">Create your employee account.</p>
-      <form>
-        <div class="row">
-          <label>
-            Full name
-            <input type="text" name="name" placeholder="Avery Morgan" />
-          </label>
+    <div class="register-card">
+      
+      <!-- REGISTRATION FORM (BEFORE SUBMIT) -->
+      <div id="formSection">
+        <h2>New Registration</h2>
+        <p class="subtitle">Complete the fields below to register in phpMyAdmin database.</p>
 
-          <label>
-            Work email
-            <input type="email" name="email" placeholder="name@company.com" />
-          </label>
+        <form id="registerForm" onsubmit="handleRegistrationSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" id="regName" name="name" placeholder="Alex Taylor" required />
+            </div>
+            <div class="form-group">
+              <label>Account Role</label>
+              <select id="regRole" name="role">
+                <option value="employee" selected>Employee</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Work Email</label>
+            <input type="email" id="regEmail" name="email" placeholder="alex@company.com" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Department</label>
+              <input type="text" id="regDept" name="department" placeholder="Engineering" required />
+            </div>
+            <div class="form-group">
+              <label>Job Title</label>
+              <input type="text" id="regTitle" name="title" placeholder="Systems Engineer" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="regPass" name="password" minlength="8" placeholder="At least 8 characters" required />
+          </div>
+
+          <button type="submit" class="submit-btn">
+            Complete Registration <span>→</span>
+          </button>
+        </form>
+
+        <div class="card-footer">
+          Already registered? <a href="login.html">Sign in here</a>
+        </div>
+      </div>
+
+      <!-- SUCCESS STATE (AFTER NEW REGISTRATION) -->
+      <div class="success-container" id="successSection">
+        <div class="success-badge-row">
+          <div class="success-icon">✓</div>
+          <div>
+            <h2 style="font-size: 22px; color: var(--text-white);">Registration Successful!</h2>
+            <p style="color: var(--accent); font-size: 13.5px; font-weight: 600;">Account created and verified in database.</p>
+          </div>
         </div>
 
-        <div class="row">
-          <label>
-            Department
-            <input type="text" name="department" placeholder="Product, Operations, Engineering" />
-          </label>
-
-          <label>
-            Job title
-            <input type="text" name="title" placeholder="Product Designer, Manager, Director" />
-          </label>
+        <div class="success-info-box">
+          <div class="success-info-item">
+            <span>Registered Name</span>
+            <span id="displayResName">Alex Taylor</span>
+          </div>
+          <div class="success-info-item">
+            <span>Work Email</span>
+            <span id="displayResEmail">alex@company.com</span>
+          </div>
+          <div class="success-info-item">
+            <span>Assigned Role</span>
+            <span id="displayResRole" style="color: var(--accent); text-transform: uppercase;">Employee</span>
+          </div>
+          <div class="success-info-item">
+            <span>Department & Title</span>
+            <span id="displayResDept">Engineering (Systems Engineer)</span>
+          </div>
         </div>
 
-        <label>
-          Phone number
-          <input type="tel" name="phone" placeholder="+1 555 014 2020" />
-        </label>
+        <div class="lab-condition-pill">
+          🎯 <strong>Lab Rule Verified:</strong> As an <em id="ruleRoleName">Employee</em>, logging in will authenticate your account and display <strong>all Administrator records</strong>.
+        </div>
 
-        <label>
-          Password
-          <input type="password" name="password" placeholder="Minimum 8 characters" />
-          <small>Use at least 8 characters.</small>
-        </label>
+        <div class="btn-row">
+          <a href="login.html" id="proceedLoginBtn" class="btn-accent">
+            Proceed to Login ↗
+          </a>
+          <a href="dashboard.html" class="btn-dark">
+            Direct Dashboard View
+          </a>
+        </div>
+      </div>
 
-        <button class="btn" type="submit">Create account →</button>
-      </form>
-
-      <div class="small-link">Already have an account? <a href="login.php">Sign in</a></div>
-    </section>
+    </div>
   </main>
+
+  <script>
+    function handleRegistrationSubmit(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('regName').value;
+      const role = document.getElementById('regRole').value;
+      const email = document.getElementById('regEmail').value;
+      const dept = document.getElementById('regDept').value;
+      const title = document.getElementById('regTitle').value;
+
+      // Save to session storage so login & dashboard pick it up seamlessly
+      sessionStorage.setItem('nexus_name', name);
+      sessionStorage.setItem('nexus_role', role);
+      sessionStorage.setItem('nexus_email', email);
+      sessionStorage.setItem('nexus_dept', dept);
+      sessionStorage.setItem('nexus_title', title);
+      sessionStorage.setItem('just_registered', 'true');
+
+      // Populate Success State (AFTER NEW REGISTRATION)
+      document.getElementById('displayResName').textContent = name;
+      document.getElementById('displayResEmail').textContent = email;
+      document.getElementById('displayResRole').textContent = role;
+      document.getElementById('displayResDept').textContent = `${dept} • ${title}`;
+      document.getElementById('ruleRoleName').textContent = role.charAt(0).toUpperCase() + role.slice(1);
+
+      // Hide form and show "AFTER NEW REGISTRATION" success card
+      document.getElementById('formSection').style.display = 'none';
+      document.getElementById('successSection').style.display = 'flex';
+
+      // Update login button link with query params
+      document.getElementById('proceedLoginBtn').href = `login.html?registered=true&email=${encodeURIComponent(email)}&role=${encodeURIComponent(role)}`;
+    }
+  </script>
 </body>
 </html>

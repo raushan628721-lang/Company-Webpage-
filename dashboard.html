@@ -3,166 +3,439 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NextGen Digital | Dashboard</title>
+  <title>NEXUS ENTERPRISE | Directory Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #17211f;
-      --muted: #69736e;
-      --paper: #f4f5ef;
-      --white: #ffffff;
-      --lime: #d9ed62;
-      --coral: #ef8a6c;
-      --line: #d9ddd4;
-      --shadow: 0 24px 60px rgba(23, 33, 31, .08);
+      --bg-body: #0c0e12;
+      --bg-card: #12151a;
+      --border-card: #1f242c;
+      --accent: #bef33e;
+      --accent-hover: #d2fb5c;
+      --text-white: #ffffff;
+      --text-muted: #8c96a3;
+      --text-light: #e6edf3;
+      --btn-dark-bg: #181c22;
+      --btn-dark-border: #29303c;
     }
-    * { box-sizing: border-box; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      margin: 0; font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink);
+      background-color: var(--bg-body);
+      color: var(--text-white);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-    a { color: inherit; text-decoration: none; }
-    .topbar {
-      height: 82px; display: flex; align-items: center; justify-content: space-between; padding: 0 6vw; border-bottom: 1px solid rgba(23,33,31,.1);
-      background: rgba(244,245,239,.92);
+
+    a { text-decoration: none; color: inherit; }
+
+    /* Navbar */
+    .navbar {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      background: rgba(12, 14, 18, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
+
     .brand {
-      display: flex; align-items: center; gap: 12px; font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -0.8px;
-    }
-    .brand-mark {
-      width: 29px; height: 29px; border-radius: 50%; background: var(--ink); color: var(--lime); display: grid; place-items: center; font-size: 16px; font-family: 'Space Grotesk', sans-serif;
-    }
-    .brand-dot { color: var(--coral); }
-    .nav { display: flex; align-items: center; gap: 22px; font-size: 14px; }
-    .nav a:last-child { border: 1px solid var(--ink); padding: 11px 17px; }
-
-    .shell { padding: 56px 10vw 90px; }
-    .header-row {
-      display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 28px;
-    }
-    .header-row h1 {
-      margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: clamp(42px, 5vw, 68px); letter-spacing: -2px; line-height: 1;
-    }
-    .header-row h1 em { color: var(--coral); font-style: normal; }
-    .badge {
-      border: 1px solid var(--line); padding: 10px 12px; font-size: 12px; color: var(--muted); background: rgba(255,255,255,.4);
-    }
-    .profile {
-      background: var(--ink); color: var(--white); padding: 24px 26px; display: flex; align-items: center; gap: 18px; margin-bottom: 42px;
-    }
-    .avatar {
-      width: 58px; height: 58px; border-radius: 50%; background: var(--coral); display: grid; place-items: center; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 24px;
-    }
-    .profile h2 { margin: 0; font-size: 32px; letter-spacing: -1px; }
-    .profile p { margin: 5px 0 0; color: #aab3ad; }
-    .profile .action {
-      margin-left: auto; background: var(--white); color: var(--ink); border: none; padding: 12px 18px; font-weight: 700; cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
     }
 
-    .section-head {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;
+    .brand-badge {
+      background: var(--accent);
+      color: #0c0e12;
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 0.8px;
+      padding: 4px 8px;
+      border-radius: 4px;
     }
-    .section-head h3 { margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 34px; letter-spacing: -1px; }
-    .count { border: 1px solid var(--line); padding: 9px 12px; font-size: 12px; color: var(--muted); background: rgba(255,255,255,.4); }
 
-    .grid {
-      display: grid; grid-template-columns: repeat(2, minmax(260px, 1fr)); gap: 16px;
+    .brand-title {
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: 0.5px;
     }
-    .card {
-      background: rgba(255,255,255,.5); border: 1px solid var(--line); padding: 20px; display: flex; gap: 14px;
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 18px;
+      font-size: 13.5px;
+      font-weight: 600;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid var(--btn-dark-border);
+      background: var(--btn-dark-bg);
+      color: #c9d1d9;
+    }
+
+    .nav-btn:hover {
+      background: #222733;
+      color: var(--text-white);
+    }
+
+    .shell {
+      flex: 1;
+      max-width: 1020px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    /* Active Session Bar */
+    .user-banner {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 14px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .user-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #0c0e12;
+      font-size: 22px;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+    }
+
+    .user-details h2 {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .user-details p {
+      color: var(--text-muted);
+      font-size: 13.5px;
+      margin-top: 4px;
+    }
+
+    .role-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-left: 8px;
+    }
+
+    .role-admin {
+      background: rgba(190, 243, 62, 0.15);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .role-employee {
+      background: rgba(99, 179, 237, 0.15);
+      border: 1px solid #63b3ed;
+      color: #63b3ed;
+    }
+
+    /* Condition Banner */
+    .condition-banner {
+      background: #10141a;
+      border: 1px solid var(--border-card);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 16px 22px;
+      font-size: 13.5px;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .condition-banner strong {
+      color: var(--accent);
+    }
+
+    /* Directory Cards Grid */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .section-header h3 {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .section-header span {
+      background: #171c24;
+      border: 1px solid var(--border-card);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 18px;
+    }
+
+    .member-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 22px;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .member-card:hover {
+      border-color: #313947;
+      transform: translateY(-2px);
+    }
+
+    .member-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
     .mini-avatar {
-      width: 44px; height: 44px; border-radius: 50%; background: var(--coral); color: var(--white); display: grid; place-items: center; font-weight: 700; font-family: 'Space Grotesk', sans-serif;
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background: #1a202a;
+      border: 1px solid var(--border-card);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 17px;
+      display: grid;
+      place-items: center;
     }
-    .details h4 { margin: 0; font-size: 20px; }
-    .details .role { margin: 4px 0 12px; color: var(--muted); font-size: 13px; }
-    .meta { display: flex; flex-wrap: wrap; gap: 10px; color: var(--muted); font-size: 11px; }
-    .meta strong { color: var(--ink); }
-    .details small { display: block; margin-top: 8px; color: var(--muted); }
 
-    @media (max-width: 760px) {
-      .header-row, .profile, .section-head { display: block; }
-      .profile .action { width: 100%; margin-top: 12px; }
-      .grid { grid-template-columns: 1fr; }
-      .nav a:not(:last-child) { display: none; }
+    .member-name {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .member-title {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .member-meta {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    .member-meta span strong {
+      color: var(--text-light);
+    }
+
+    @media (max-width: 768px) {
+      .navbar { padding: 14px 20px; flex-direction: column; gap: 12px; height: auto; }
+      .user-banner { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <a href="index.html" class="brand">
-      <span class="brand-mark">N</span>
-      <span>NextGen Digital<span class="brand-dot">.</span></span>
-    </a>
-    <nav class="nav">
-      <a href="index.html">Workspace</a>
-      <a href="login.html">Sign in</a>
-      <a href="index.html">Sign out</a>
+
+  <!-- Top Navbar -->
+  <header class="navbar">
+    <div class="brand" onclick="window.location.href='index.html'">
+      <span class="brand-badge">NEXUS</span>
+      <span class="brand-title">ENTERPRISE</span>
+    </div>
+
+    <nav class="nav-links">
+      <a href="index.html" class="nav-btn">Home</a>
+      <a href="login.html" class="nav-btn" onclick="sessionStorage.clear()">Sign Out</a>
     </nav>
   </header>
 
   <main class="shell">
-    <div class="header-row">
-      <h1>Good morning, <em>Avery.</em></h1>
-      <div class="badge">Admin account</div>
-    </div>
-
-    <section class="profile">
-      <div class="avatar">A</div>
-      <div>
-        <h2>Avery Morgan</h2>
-        <p>Chief Operating Officer · Operations</p>
+    
+    <!-- User Banner -->
+    <section class="user-banner">
+      <div class="user-info">
+        <div class="user-avatar" id="avatarBox">E</div>
+        <div class="user-details">
+          <h2>
+            <span id="userName">Sam Rivera</span>
+            <span class="role-badge role-employee" id="userRoleBadge">EMPLOYEE</span>
+          </h2>
+          <p id="userSub">Product Designer • Product Department</p>
+        </div>
       </div>
-      <button class="action" type="button">Sign out</button>
+      <div>
+        <button class="nav-btn" onclick="toggleRoleSwitch()" style="font-size: 12.5px;">Switch Role View ⟳</button>
+      </div>
     </section>
 
-    <div class="section-head">
-      <h3>Your team</h3>
-      <div class="count">3 people</div>
+    <!-- Lab Condition Banner -->
+    <div class="condition-banner" id="conditionNotice">
+      <span>🎯</span>
+      <span><strong>Lab Rule Active:</strong> You are logged in as an <span id="currentRoleText">Employee</span>. The system is showing you <strong>all Admin records</strong>.</span>
     </div>
 
-    <section class="grid">
-      <article class="card">
-        <div class="mini-avatar">S</div>
-        <div class="details">
-          <h4>Sam Rivera</h4>
-          <div class="role">Product Designer</div>
-          <div class="meta"><strong>Product</strong><span>sam@nextgendigital.test</span></div>
-          <small>+1 555 014 2021</small>
-        </div>
-      </article>
+    <!-- Directory Grid -->
+    <div class="section-header">
+      <h3 id="sectionTitle">Administrator Team Directory</h3>
+      <span id="memberCount">2 Verified Records</span>
+    </div>
 
-      <article class="card">
-        <div class="mini-avatar">L</div>
-        <div class="details">
-          <h4>Leah Brooks</h4>
-          <div class="role">Marketing Lead</div>
-          <div class="meta"><strong>Marketing</strong><span>leah@nextgendigital.test</span></div>
-          <small>+1 555 014 2031</small>
-        </div>
-      </article>
+    <div class="cards-grid" id="directoryGrid">
+      <!-- Injected by JavaScript -->
+    </div>
 
-      <article class="card">
-        <div class="mini-avatar">J</div>
-        <div class="details">
-          <h4>Jordan Lee</h4>
-          <div class="role">Engineering Manager</div>
-          <div class="meta"><strong>Engineering</strong><span>jordan@nextgendigital.test</span></div>
-          <small>+1 555 014 2040</small>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="mini-avatar">N</div>
-        <div class="details">
-          <h4>Noah Singh</h4>
-          <div class="role">Operations Specialist</div>
-          <div class="meta"><strong>Operations</strong><span>noah@nextgendigital.test</span></div>
-          <small>+1 555 014 2051</small>
-        </div>
-      </article>
-    </section>
   </main>
+
+  <script>
+    const admins = [
+      { name: "Avery Morgan", role: "Admin", title: "Chief Operating Officer", dept: "Operations", email: "admin@nextgendigital.test", phone: "+1 555 014 2020" },
+      { name: "Marcus Chen", role: "Admin", title: "Head of Infrastructure & SecOps", dept: "Engineering", email: "marcus.chen@nexus.corp", phone: "+1 555 014 8832" }
+    ];
+
+    const employees = [
+      { name: "Sam Rivera", role: "Employee", title: "Lead Product Designer", dept: "Product & UI", email: "employee@nextgendigital.test", phone: "+1 555 014 2021" },
+      { name: "Elena Rostova", role: "Employee", title: "Senior Fullstack Engineer", dept: "Development", email: "elena.r@nexus.corp", phone: "+1 555 014 7710" },
+      { name: "Devon Vance", role: "Employee", title: "Data Analyst & BI Specialist", dept: "Analytics", email: "devon.v@nexus.corp", phone: "+1 555 014 6219" }
+    ];
+
+    let currentRole = sessionStorage.getItem('nexus_role') || 'employee';
+
+    function renderDashboard() {
+      const avatarBox = document.getElementById('avatarBox');
+      const userName = document.getElementById('userName');
+      const userRoleBadge = document.getElementById('userRoleBadge');
+      const userSub = document.getElementById('userSub');
+      const currentRoleText = document.getElementById('currentRoleText');
+      const conditionNotice = document.getElementById('conditionNotice');
+      const sectionTitle = document.getElementById('sectionTitle');
+      const memberCount = document.getElementById('memberCount');
+      const grid = document.getElementById('directoryGrid');
+
+      const customName = sessionStorage.getItem('nexus_name');
+      const customDept = sessionStorage.getItem('nexus_dept');
+      const customTitle = sessionStorage.getItem('nexus_title');
+
+      if (currentRole === 'employee') {
+        const displayName = customName || 'Sam Rivera';
+        avatarBox.textContent = displayName.charAt(0).toUpperCase();
+        avatarBox.style.background = '#63b3ed';
+        avatarBox.style.color = '#0c0e12';
+        userName.textContent = displayName;
+        userRoleBadge.textContent = 'EMPLOYEE';
+        userRoleBadge.className = 'role-badge role-employee';
+        userSub.textContent = customTitle ? `${customTitle} • ${customDept || 'Department'}` : 'Product Designer • Product Department';
+        
+        currentRoleText.textContent = 'Employee';
+        conditionNotice.innerHTML = `<span>🎯</span><span><strong>Lab Rule 1 Active:</strong> Logged in as an <em>Employee</em> — Authenticated successfully! Displaying <strong>all Admin details</strong>.</span>`;
+        sectionTitle.textContent = 'Authorized Administrator Details';
+        memberCount.textContent = `${admins.length} Admin Records`;
+
+        grid.innerHTML = admins.map(a => `
+          <div class="member-card">
+            <div class="member-top">
+              <div class="mini-avatar" style="color:var(--accent);">${a.name.charAt(0)}</div>
+              <div>
+                <div class="member-name">${a.name}</div>
+                <div class="member-title">${a.title}</div>
+              </div>
+            </div>
+            <div class="member-meta">
+              <span>Department: <strong>${a.dept}</strong></span>
+              <span>Work Email: <strong>${a.email}</strong></span>
+              <span>Direct Phone: <strong>${a.phone}</strong></span>
+            </div>
+          </div>
+        `).join('');
+
+      } else {
+        avatarBox.textContent = 'A';
+        avatarBox.style.background = 'var(--accent)';
+        avatarBox.style.color = '#0c0e12';
+        userName.textContent = 'Avery Morgan';
+        userRoleBadge.textContent = 'ADMIN';
+        userRoleBadge.className = 'role-badge role-admin';
+        userSub.textContent = 'Chief Operating Officer • Operations Department';
+
+        currentRoleText.textContent = 'Admin';
+        conditionNotice.innerHTML = `<span>🎯</span><span><strong>Lab Rule 2 Active:</strong> Logged in as an <em>Admin</em> — Authenticated successfully! Displaying <strong>all Employee details</strong>.</span>`;
+        sectionTitle.textContent = 'Authorized Employee Directory';
+        memberCount.textContent = `${employees.length} Employee Records`;
+
+        grid.innerHTML = employees.map(e => `
+          <div class="member-card">
+            <div class="member-top">
+              <div class="mini-avatar" style="color:#63b3ed;">${e.name.charAt(0)}</div>
+              <div>
+                <div class="member-name">${e.name}</div>
+                <div class="member-title">${e.title}</div>
+              </div>
+            </div>
+            <div class="member-meta">
+              <span>Department: <strong>${e.dept}</strong></span>
+              <span>Work Email: <strong>${e.email}</strong></span>
+              <span>Direct Phone: <strong>${e.phone}</strong></span>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function toggleRoleSwitch() {
+      currentRole = (currentRole === 'employee') ? 'admin' : 'employee';
+      sessionStorage.setItem('nexus_role', currentRole);
+      renderDashboard();
+    }
+
+    renderDashboard();
+  </script>
 </body>
 </html>

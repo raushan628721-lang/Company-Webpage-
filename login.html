@@ -3,155 +3,389 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NextGen Digital | Sign In</title>
+  <title>NEXUS ENTERPRISE | Portal Login</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #122028;
-      --muted: #5f6f79;
-      --paper: #f3f5f2;
-      --white: #ffffff;
-      --lime: #d9ea5b;
-      --coral: #e57d63;
-      --line: #d7dfd5;
-      --shadow: 0 28px 70px rgba(18, 32, 40, 0.10);
+      --bg-body: #0c0e12;
+      --bg-card: #12151a;
+      --border-card: #1f242c;
+      --accent: #bef33e;
+      --accent-hover: #d2fb5c;
+      --text-white: #ffffff;
+      --text-muted: #8c96a3;
+      --text-light: #e6edf3;
+      --btn-dark-bg: #181c22;
+      --btn-dark-border: #29303c;
+      --input-bg: #161a22;
+      --input-border: #262d3a;
     }
-    * { box-sizing: border-box; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      margin: 0;
-      font-family: 'DM Sans', sans-serif;
-      background: var(--paper);
-      color: var(--ink);
+      background-color: var(--bg-body);
+      color: var(--text-white);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-    a { color: inherit; text-decoration: none; }
-    .topbar {
-      height: 86px; display: flex; align-items: center; justify-content: space-between;
-      padding: 0 6vw; border-bottom: 1px solid rgba(18,32,40,.08);
-      background: rgba(243,245,242,.92);
-      backdrop-filter: blur(12px);
+
+    a { text-decoration: none; color: inherit; }
+
+    /* Navbar */
+    .navbar {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      background: rgba(12, 14, 18, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
+
     .brand {
-      display: flex; align-items: center; gap: 12px;
-      font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -0.8px;
-    }
-    .brand-mark {
-      width: 31px; height: 31px; border-radius: 8px; background: var(--ink); color: var(--lime);
-      display: grid; place-items: center; font-size: 15px; font-family: 'Space Grotesk', sans-serif;
-    }
-    .brand-dot { color: var(--coral); }
-    .nav {
-      display: flex; align-items: center; gap: 22px; font-size: 14px; font-weight: 500;
-    }
-    .nav a:last-child {
-      border: 1px solid var(--ink); padding: 11px 18px; border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
     }
 
-    .login-wrap {
-      min-height: calc(100vh - 82px);
-      display: grid; grid-template-columns: 1fr 1.1fr; align-items: center; padding: 6vh 10vw;
-      gap: 4vw;
-    }
-    .left h1 {
-      font-family: 'Space Grotesk', sans-serif; font-size: clamp(44px, 5vw, 72px); letter-spacing: -2px; margin: 0;
-      line-height: 0.97;
-    }
-    .left h1 em { color: var(--coral); font-style: normal; }
-    .eyebrow {
-      margin: 0 0 18px; font-size: 11px; letter-spacing: 1.7px; text-transform: uppercase; color: var(--muted); font-weight: 700;
-    }
-    .left p {
-      color: var(--muted); font-size: 17px; max-width: 420px; line-height: 1.6; margin-top: 20px;
+    .brand-badge {
+      background: var(--accent);
+      color: #0c0e12;
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 0.8px;
+      padding: 4px 8px;
+      border-radius: 4px;
     }
 
-    .card {
-      background: var(--white); box-shadow: var(--shadow); padding: 36px 34px;
-      max-width: 560px; width: 100%; justify-self: center;
+    .brand-title {
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: 0.5px;
     }
-    .card h2 {
-      margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: clamp(28px, 3vw, 38px); letter-spacing: -1px;
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
-    .muted {
-      margin: 10px 0 26px; color: var(--muted); font-size: 14px;
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 18px;
+      font-size: 13.5px;
+      font-weight: 600;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
     }
-    form { display: grid; gap: 18px; }
-    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .nav-btn-active {
+      background: var(--accent);
+      color: #0c0e12;
+      font-weight: 700;
+    }
+
+    .nav-btn-dark {
+      background: var(--btn-dark-bg);
+      border-color: var(--btn-dark-border);
+      color: #c9d1d9;
+    }
+
+    .nav-btn-dark:hover {
+      background: #222733;
+      color: var(--text-white);
+    }
+
+    /* Main Container */
+    .login-container {
+      flex: 1;
+      max-width: 960px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .login-left {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .login-tag {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .login-left h1 {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      line-height: 1.15;
+    }
+
+    .login-left h1 span {
+      color: var(--accent);
+    }
+
+    .login-left p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* Card */
+    .login-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 38px 34px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+
+    .login-card h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .login-card .subtitle {
+      color: var(--text-muted);
+      font-size: 13.5px;
+      margin-bottom: 20px;
+    }
+
+    .flash-success {
+      background: rgba(190, 243, 62, 0.12);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 18px;
+      font-size: 13.5px;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+    }
+
+    .demo-pill {
+      background: #171c24;
+      border: 1px solid #252d3a;
+      border-left: 3px solid var(--accent);
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 22px;
+      line-height: 1.5;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
     label {
-      display: grid; gap: 7px; font-size: 13px; font-weight: 700;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-light);
     }
+
     select, input {
-      width: 100%; border: 1px solid var(--line); background: #fbfcf9; color: var(--ink); padding: 13px 12px; font: 15px 'DM Sans', sans-serif; outline: none;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      color: var(--text-white);
+      padding: 12px 14px;
+      font-size: 14px;
+      font-family: inherit;
+      border-radius: 8px;
+      outline: none;
+      transition: all 0.2s ease;
     }
-    input:focus, select:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(217,237,98,.5); }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 16px; width: 100%; border: none; padding: 15px 18px; font: 700 15px 'DM Sans', sans-serif; cursor: pointer; background: var(--ink); color: var(--white);
+
+    select:focus, input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(190, 243, 62, 0.15);
     }
-    .btn:hover { background: #2d3b36; }
-    .small-link {
-      margin-top: 20px; text-align: center; color: var(--muted); font-size: 13px;
+
+    .submit-btn {
+      background: var(--accent);
+      color: #0c0e12;
+      font-size: 14.5px;
+      font-weight: 700;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
     }
-    .small-link a { color: var(--ink); font-weight: 700; text-decoration: underline; }
-    .alert {
-      margin: 0 0 18px; padding: 12px 14px; font-size: 13px;
-      background: #fff0ec; color: #a64932;
+
+    .submit-btn:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 4px 18px rgba(190, 243, 62, 0.3);
+      transform: translateY(-1px);
     }
-    @media (max-width: 760px) {
-      .login-wrap { grid-template-columns: 1fr; padding: 30px 8vw; }
-      .row { grid-template-columns: 1fr; }
-      .card { padding: 26px 20px; }
-      .nav a:not(:last-child) { display: none; }
+
+    .card-footer {
+      margin-top: 22px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .card-footer a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .navbar { padding: 14px 20px; flex-direction: column; gap: 12px; height: auto; }
+      .login-container { grid-template-columns: 1fr; margin: 20px auto; }
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <a href="index.html" class="brand">
-      <span class="brand-mark">N</span>
-      <span>NextGen Digital<span class="brand-dot">.</span></span>
-    </a>
-    <nav class="nav">
-      <a href="index.html#about">About us</a>
-      <a href="login.html">Sign in</a>
-      <a href="register.html">Join the team</a>
+
+  <!-- Top Navbar -->
+  <header class="navbar">
+    <div class="brand" onclick="window.location.href='index.html'">
+      <span class="brand-badge">NEXUS</span>
+      <span class="brand-title">ENTERPRISE</span>
+    </div>
+
+    <nav class="nav-links">
+      <a href="index.html" class="nav-btn nav-btn-dark">Home</a>
+      <a href="register.html" class="nav-btn nav-btn-dark">Registration</a>
+      <a href="login.html" class="nav-btn nav-btn-active">Login</a>
+      <a href="index.html" class="nav-btn nav-btn-dark">PHP / MySQL Backend</a>
     </nav>
   </header>
 
-  <main class="login-wrap">
-    <section class="left">
-      <p class="eyebrow">Welcome back</p>
-      <h1>Your work,<br><em>in focus.</em></h1>
-      <p>Sign in to your NextGen Digital workspace and continue building with your team.</p>
-    </section>
+  <main class="login-container">
+    <div class="login-left">
+      <span class="login-tag">Secure Gateway</span>
+      <h1>Enterprise Access <span>Control</span></h1>
+      <p>Log in with your designated role. Note the lab condition: logging in as Employee reveals Admin records, and Admin reveals Employee records.</p>
+    </div>
 
-    <section class="card">
-      <h2>Sign in</h2>
-      <p class="muted">Use your employee or admin account to continue.</p>
-      <div class="alert">Demo accounts: Admin: admin@nextgendigital.test / admin123 · Employee: employee@nextgendigital.test / employee123</div>
-      <form>
-        <label>
-          Account type
-          <select name="role">
+    <div class="login-card">
+      <h2>Portal Login</h2>
+      <p class="subtitle">Enter your employee or admin credentials to proceed.</p>
+
+      <!-- Post-registration Banner (if arrived from new registration) -->
+      <div class="flash-success" id="regFlashBanner" style="display: none;">
+        <span>✓</span>
+        <span>Account created! Enter your credentials to access the workspace.</span>
+      </div>
+
+      <div class="demo-pill">
+        <strong>Demo Accounts:</strong><br>
+        • Admin: <span style="color:var(--accent);">admin@nextgendigital.test</span> / admin123<br>
+        • Employee: <span style="color:var(--accent);">employee@nextgendigital.test</span> / employee123
+      </div>
+
+      <form id="loginForm" onsubmit="handlePortalLogin(event)">
+        <div class="form-group">
+          <label>Account Role</label>
+          <select id="roleSelect" name="role">
             <option value="employee">Employee</option>
             <option value="admin">Admin</option>
           </select>
-        </label>
+        </div>
 
-        <label>
-          Work email
-          <input type="email" name="email" value="employee@nextgendigital.test" placeholder="name@company.com" />
-        </label>
+        <div class="form-group">
+          <label>Work Email</label>
+          <input type="email" id="emailInput" name="email" value="employee@nextgendigital.test" required />
+        </div>
 
-        <label>
-          Password
-          <input type="password" name="password" value="employee123" />
-        </label>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="passwordInput" name="password" value="employee123" required />
+        </div>
 
-        <button class="btn" type="submit">Enter workspace →</button>
+        <button type="submit" class="submit-btn">
+          Enter Workspace <span>↗</span>
+        </button>
       </form>
 
-      <div class="small-link">New to NextGen Digital? <a href="register.php">Create an account</a></div>
-    </section>
+      <div class="card-footer">
+        Don't have an account? <a href="register.html">Create an account</a>
+      </div>
+    </div>
   </main>
+
+  <script>
+    // Check if redirected after registration
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('registered') === 'true' || sessionStorage.getItem('just_registered') === 'true') {
+      document.getElementById('regFlashBanner').style.display = 'flex';
+      sessionStorage.removeItem('just_registered');
+      
+      const savedEmail = urlParams.get('email') || sessionStorage.getItem('nexus_email');
+      const savedRole = urlParams.get('role') || sessionStorage.getItem('nexus_role');
+
+      if (savedEmail) document.getElementById('emailInput').value = savedEmail;
+      if (savedRole) document.getElementById('roleSelect').value = savedRole;
+      document.getElementById('passwordInput').value = '';
+      document.getElementById('passwordInput').focus();
+    }
+
+    // Role switcher demo auto-fill
+    const roleSelect = document.getElementById('roleSelect');
+    roleSelect.addEventListener('change', () => {
+      if (roleSelect.value === 'admin') {
+        document.getElementById('emailInput').value = 'admin@nextgendigital.test';
+        document.getElementById('passwordInput').value = 'admin123';
+      } else {
+        const customEmail = sessionStorage.getItem('nexus_email');
+        document.getElementById('emailInput').value = customEmail || 'employee@nextgendigital.test';
+        document.getElementById('passwordInput').value = 'employee123';
+      }
+    });
+
+    function handlePortalLogin(e) {
+      e.preventDefault();
+      
+      const role = document.getElementById('roleSelect').value;
+      const email = document.getElementById('emailInput').value;
+
+      sessionStorage.setItem('nexus_role', role);
+      sessionStorage.setItem('nexus_email', email);
+
+      window.location.href = 'dashboard.html';
+    }
+  </script>
 </body>
 </html>
